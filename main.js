@@ -1,79 +1,87 @@
-// base de datos de los personajes del juego.
-
-const elfoWarrior = {
-    name: 'Legolas', 
+// base de datos de los personajes principales del juego.
+const personajesPrincipales = [{
+    id: 1,
+    name: 'Legolas',
+    class: 'Elfo Warrior', 
     pAtk: 25, 
     pDef: 65,
     healthPoints: 75,
-    speed: 7
-};
-const humanWarrior = {
+    speed: 7},
+    {
+    id: 2,
     name: 'Aragorn',
+    clase: 'Human Warrior',
     pAtk: 70,
     pDef: 80,
     heathPoints: 85,
-    speed: 5
-};
-const mageWizard = {
+    speed: 5},
+    {
+    id: 3,
     name: 'Gandalf',
+    class: 'Gray Wizard',
     pAtk: 80,
     pDef: 65,
     healthPoints: 65,
     speed: 6
-};
-const darkElfWizard = {
+    }]
+    // base de datos de enemigos
+const enemigosPrincipales = [{
+    id: 1,
     name: 'Saruman',
+    class: 'White Wizard',
     pAtk: 90,
     pDef: 60,
     healthPoints: 55,
-    element: 'Planta'
-};
-const orc = {
+    element: 'Planta'},
+    {
+    id: 2,
     name: 'azog',
+    class: 'Infernal Orc',
     pAtk: 80,
     pDef: 70,
     healthPoints: 75,
-    element: 'Fuego'
-}
-const cursedDwarf = {
+    element: 'Fuego'},
+    {
+    id: 3,
     name: 'Cursed Gimli',
+    class: 'Dead Dwarf',
     pAtk: 75,
     pDef: 75,
     healthPoints: 95,
-    element: 'Tierra'
-}
-const orc2 = {
+    element: 'Tierra'},
+    {
+    id: 4,
     name: 'Ugluk',
+    class: 'Uruk-hai',
     pAtk: 65,
     pDef: 70,
     healthPoints: 95,
-    element: 'Planta'
-}
-// Finaliza base de datos de personajes.
+    element: 'Planta'}]
 
-//Base de datos de armas medievales
-const sword = {
+//finaliza base de datos de enemigos, comienza base de datos de armas.
+
+const armasMedievales = [{
+    id: 1,
     name: 'una Espada infernal',
     weaponPwr: 30,
     element: 'Fuego'
-};
-const bow = {
+},{
+    id: 2,
     name: 'el Arco del bosque',
     weaponPwr: 45,
     element: 'Planta'
-};
-const staff = {
+},{
+    id: 3,
     name: 'un Baculo de agua',
     weaponPwr: 40,
     element: 'Agua'
-}
-
-const axe = {
+},{
+    id: 3,
     name: 'un Hacha elemento tierra',
     weaponPwr: 40,
     element: 'Tierra'
-};
-
+}]
+// Finaliza base de datos 
 
 // Logica para un roll random entre 0 y 20 para agregar al P.atk
 const generadorRoll = () => {
@@ -135,7 +143,7 @@ function promedio(){
     } return promedioEdades
 }
 
-
+console.log(personajesPrincipales[0])
 console.log(edadesJugadores)
 console.log('el promedio de edades de los jugadores es ' + promedio())
 //edades de los jugadores ordenados por edad

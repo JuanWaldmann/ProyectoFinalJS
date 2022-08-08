@@ -3,7 +3,8 @@ const personajesPrincipales = [{
     id: 1,
     name: 'Legolas',
     class: 'Elfo Warrior', 
-    pAtk: 25, 
+    description: 'Powerful Elf archer with great attack, and weak defense',
+    pAtk: 85, 
     pDef: 65,
     healthPoints: 75,
     speed: 7},
@@ -11,16 +12,18 @@ const personajesPrincipales = [{
     id: 2,
     name: 'Aragorn',
     clase: 'Human Warrior',
+    description: 'Legendary melee warrior, sword mastery, very strong defense weaker base attack',
     pAtk: 70,
     pDef: 80,
-    heathPoints: 85,
-    speed: 5},
-    {
+    healthPoints: 85,
+    speed: 5
+    },{
     id: 3,
     name: 'Gandalf',
     class: 'Gray Wizard',
+    description: 'The gray wizard, very strong attack, low health points and very low defense',
     pAtk: 80,
-    pDef: 65,
+    pDef: 55,
     healthPoints: 65,
     speed: 6
     }]
@@ -29,14 +32,16 @@ const enemigosPrincipales = [{
     id: 1,
     name: 'Saruman',
     class: 'White Wizard',
+    description: 'The white wizard, few character need such little introduction, strong enemy. Bigger rewards.',
     pAtk: 90,
     pDef: 60,
     healthPoints: 55,
     element: 'Planta'},
     {
     id: 2,
-    name: 'azog',
+    name: 'Azog',
     class: 'Infernal Orc',
+    description: 'Created to cause death and destruction, beware with this beast it has very strong attack',
     pAtk: 80,
     pDef: 70,
     healthPoints: 75,
@@ -45,6 +50,7 @@ const enemigosPrincipales = [{
     id: 3,
     name: 'Cursed Gimli',
     class: 'Dead Dwarf',
+    description: 'Dwarves are normally pretty peaceful, unfortunately this enemy was attacked by a necromancer and got cursed for life',
     pAtk: 75,
     pDef: 75,
     healthPoints: 95,
@@ -53,6 +59,7 @@ const enemigosPrincipales = [{
     id: 4,
     name: 'Ugluk',
     class: 'Uruk-hai',
+    description: 'Strongest orc archer in the kingdom, be careful of its pearcing arrow',
     pAtk: 65,
     pDef: 70,
     healthPoints: 95,
@@ -83,31 +90,102 @@ const armasMedievales = [{
 }]
 // Finaliza base de datos 
 
-// Logica para un roll random entre 0 y 20 para agregar al P.atk
+// mostrar personajes en cards
+personajesPrincipales.forEach((personajes) => {
+    document.getElementById('namePersonajes').innerHTML += `<div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">${personajes.name}</h5>
+        <p class="card-text">${personajes.description}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <label>Power Atack</label><li class="list-group-item">${personajes.pAtk}</li>
+        <label>Defense</label><li class="list-group-item">${personajes.pDef}</li>
+        <label>Health Points</label><li class="list-group-item">${personajes.healthPoints}</li>
+      </ul>
+      <div class="card-body">
+        <a href="#" class="card-link" id="boton-elegir${personajes.id}">Choose</a>
+        <a href="#" class="card-link">Equip Weapon</a>
+      </div>
+</div>`
+})
+// mostrar enemigos en cards
+enemigosPrincipales.forEach((enemigos) => {
+    document.getElementById('cards-enemigos').innerHTML += `<div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">${enemigos.name}</h5>
+        <p class="card-text">${enemigos.description}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <label>Power Atack</label><li class="list-group-item">${enemigos.pAtk}</li>
+        <label>Defense</label><li class="list-group-item">${enemigos.pDef}</li>
+        <label>Health Points</label><li class="list-group-item">${enemigos.healthPoints}</li>
+      </ul>
+      <div class="card-body">
+        <a href="#" class="card-link" id="boton-elegir-enemigos${enemigos.id}">Choose Enemy</a>
+        <a href="#" class="card-link">Fight</a>
+      </div>
+</div>`
+})
+
+//eligiendo personaje principal.
+let personajeElegido = []
+
+personajesPrincipales.forEach((personajes) =>{
+    const btnElegir = `boton-elegir${personajes.id}`
+    document.getElementById(btnElegir).addEventListener('click', (event) => {
+        const nodo = event.target;
+        nodo.getAttribute('data-id')
+        
+        personajeElegido = personajes
+        console.log(personajeElegido)
+        console.log(`Has elegido a ${personajeElegido.name} como heroe para luchar`)
+    })
+})
+// eligiendo enemigo para luchar.
+let enemigoElegido = []
+enemigosPrincipales.forEach((enemigos) =>{
+    const btnElegirEnemigos = `boton-elegir-enemigos${enemigos.id}`
+    document.getElementById(btnElegirEnemigos).addEventListener('click', (event) => {
+        const nodo = event.target;
+        nodo.getAttribute('data-id')
+        enemigoElegido = enemigos
+        console.log(`Has elegido a ${enemigoElegido.name} para atacar, mucha suerte`)
+    })
+})
+
+
+// Logica para un roll random entre 0 y 30 para agregar al P.atk
 const generadorRoll = () => {
     return Math.round(Math.random() * 30 )
 }
-
-//battle simulator
-
-
-function pelea() {
-    darkElfWizard.healthPoints -= (multiplier * (generadorRoll() + elfoWarrior.pAtk)  - darkElfWizard.pDef)
-    elfoWarrior.healthPoints -= (darkElfWizard.pAtk - elfoWarrior.pDef)
-    
-    if (darkElfWizard.healthPoints <= 0 ){
-        console.log('Felicitaciones ganaste la pelea')
-    }else if (elfoWarrior.healthPoints > 0 ) {
-        console.log('El enemigo sigue vivo, le queda ' + darkElfWizard.healthPoints + ' de HP y a ti te quedan ' + elfoWarrior.healthPoints + ' sigue peleando!')
-    }else {
-        console.log('Oh no! has perdido la batalla, mejor suerte la proxima.')} 
+const generadorRollEnemigo = () => {
+    return Math.round(Math.random() * 20 )
 }
+//battle simulator
+let fight = function pelea() {
+    let personajeElegidoPelea = personajeElegido 
+    let enemigoElegidoPelea = enemigoElegido
+    enemigoElegidoPelea.healthPoints -= Math.abs(multiplier * (generadorRoll() + personajeElegidoPelea.pAtk)) - enemigoElegidoPelea.pDef
+    personajeElegidoPelea.healthPoints -= Math.abs(generadorRollEnemigo() + enemigoElegidoPelea.pAtk - personajeElegidoPelea.pDef)
+    
+    if (enemigoElegidoPelea.healthPoints <= 0 ){
+        console.log('Felicitaciones ganaste la pelea')
+    }else if (enemigoElegidoPelea.healthPoints > 0 && personajeElegidoPelea.healthPoints > 0) {
+        console.log('El enemigo sigue vivo, le queda ' + enemigoElegidoPelea.healthPoints + ' de HP y a ti te quedan ' + personajeElegidoPelea.healthPoints + ' sigue peleando!')    
+    }else { 
+        console.log('Oh no! has perdido la batalla, mejor suerte la proxima.')
+        
+}}
 
+document.getElementById('pelea').addEventListener('click', fight)
 //equip item.
+
 function equip(){
-    elfoWarrior.pAtk += sword.weaponPwr
-    elfoWarrior.element = sword.element
-    console.log('Has equipado ' + sword.name + ', tu poder de Ataque base es de ' + elfoWarrior.pAtk + ' y ahora tu elemento es el ' + elfoWarrior.element)
+    personajesPrincipales[0].pAtk += armasMedievales[0].weaponPwr
+    personajesPrincipales[0].element = armasMedievales[0].element
+    console.log('Has equipado ' + armasMedievales[0].name + ', tu poder de Ataque base es de ' + personajesPrincipales[0].pAtk + ' y ahora tu elemento es el ' + personajesPrincipales[0].element)
 }
 
 //batalla con multiplicador por elemento.
@@ -115,65 +193,15 @@ var multiplier = 0
 
 function peleaConArma(){
     
-    if ((elfoWarrior.element === 'Tierra' && darkElfWizard.element === 'Agua') || (elfoWarrior.element === 'Agua' && darkElfWizard.element === 'Fuego') || (elfoWarrior.element === 'Fuego' && darkElfWizard.element === 'Planta') || (elfoWarrior.element === 'Planta' && darkElfWizard.element === 'Tierra')) {
+    if ((personajesPrincipales[0].element === 'Tierra' && enemigosPrincipales[0].element === 'Agua') || (personajesPrincipales[0].element === 'Agua' && enemigosPrincipales[0].element === 'Fuego') || (personajesPrincipales[0].element === 'Fuego' && enemigosPrincipales[0].element === 'Planta') || (personajesPrincipales[0].element === 'Planta' && enemigosPrincipales[0].element === 'Tierra')) {
         multiplier = 1.25
         return console.log('Super efectivo atacas con un multiplicador de ' + multiplier)
-    }else if ((elfoWarrior.element === 'Agua' && darkElfWizard.element === 'Tierra') || (elfoWarrior.element === 'Fuego' && darkElfWizard.element === 'Agua') || (elfoWarrior.element === 'Planta' && darkElfWizard.element === 'Fuego') || (elfoWarrior.element === 'Tierra' && darkElfWizard.element === 'Planta')){
+    }else if ((personajesPrincipales[0].element === 'Agua' && enemigosPrincipales[0].element === 'Tierra') || (personajesPrincipales[0].element === 'Fuego' && enemigosPrincipales[0].element === 'Agua') || (personajesPrincipales[0].element === 'Planta' && enemigosPrincipales[0].element === 'Fuego') || (personajesPrincipales[0].element === 'Tierra' && enemigosPrincipales[0].element === 'Planta')){
         multiplier = 0.75
         console.log('Not very efective, penalizacion activada, atacas con un multiplicador de' + multiplier)
     } else {
         multiplier = 1
         console.log('meh, times ' + multiplier + ' multiplier.')}
 }
-
-const edadesJugadores = [15, 25, 30, 45, 18, 17, 16, 18, 20] 
-edadesJugadores.push = parseInt(prompt('Cuantos anios tienes?'))
-
-//promedio de edades de los jugadores.
-
-
-var resultado = 0 
-var promedioEdades = 0
-
-function promedio(){
-    for (let i = 0 ; i < edadesJugadores.length ; i++){
-        
-        resultado += edadesJugadores[i]
-        promedioEdades = resultado / edadesJugadores.length
-    } return promedioEdades
-}
-
-console.log(personajesPrincipales[0])
-console.log(edadesJugadores)
-console.log('el promedio de edades de los jugadores es ' + promedio())
-//edades de los jugadores ordenados por edad
-console.log(edadesJugadores.sort())
-equip()
 peleaConArma()
-pelea()
-pelea()
-pelea()
-console.log(elfoWarrior)
-console.log(darkElfWizard)
-
-// CODIGO COMENTADO INTENCIONALMENTE, todavia sigo trabajando en esta opcion, o la otra con if que esta mas arriba, la idea es que el valor del objeto sea modificado durante el proceso logico y no permanentemente. los HP de los enemigos tienen que volver a su valor original. 
-
-/*function pelea() { 
-    let enemyHealthPoints = darkElfWizard.healthPoints
-    let enemyPDef = darkElfWizard.pDef
-    let playerPDef = elfoWarrior.pDef
-    let playerHealthPoints = elfoWarrior.healthPoints
-
-    for (let hpRestante = enemyHealthPoints ; hpRestante > 0 ; hpRestante ) {
-        if(enemyHealthPoints <= 0){
-            console.log('Felicitaciones, has ganado la batalla')
-        }else{
-        hpRestante -= (multiplier * (generadorRoll() + elfoWarrior.pAtk) - enemyPDef) 
-        let playerHpRestante = playerHealthPoints - (darkElfWizard.pAtk - playerPDef)
-        
-        console.log('el enemigo tiene ' + hpRestante + ' a ti te quedan ' + playerHpRestante + ' sigue peleando') }
-    }
-    
-}*/
-
 

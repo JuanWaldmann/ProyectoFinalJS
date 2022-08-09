@@ -128,6 +128,30 @@ enemigosPrincipales.forEach((enemigos) => {
       </div>
 </div>`
 })
+//menu aside para inventario
+armasMedievales.forEach((armas) => {
+    document.getElementById('inventario').innerHTML += `<div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">${armas.name}</h5>
+        <p class="card-text">${armas.description}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <label>Power Atack</label><li class="list-group-item">${armas.pAtk}</li>
+        <label>Health Points</label><li class="list-group-item">${armas.healthPoints}</li>
+      </ul>
+      <div class="card-body">
+        <a href="#" class="card-link" id="boton-elegir${armas.id}">Choose</a>
+        <a href="#" class="card-link">Equip Weapon</a>
+      </div>
+</div>`
+})
+let botonInventario = document.querySelector('.botonInv');
+let inventario = document.getElementById('inventario');
+
+botonInventario.addEventListener('click', () => {
+    inventario.style.transform = 'translateY(0)';
+})
 
 //eligiendo personaje principal.
 let personajeElegido = []

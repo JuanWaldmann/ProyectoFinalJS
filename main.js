@@ -36,7 +36,7 @@ const enemigosPrincipales = [{
     pAtk: 90,
     pDef: 60,
     healthPoints: 55,
-    element: 'Planta'},
+    element: 'Agua'},
     {
     id: 2,
     name: 'Azog',
@@ -69,23 +69,27 @@ const enemigosPrincipales = [{
 
 const armasMedievales = [{
     id: 1,
-    name: 'una Espada infernal',
-    weaponPwr: 30,
+    name: 'Espada infernal',
+    description: 'Poderosa espada creada en mordor, super efectiva contra enemigos bosque',
+    pAtk: 30,
     element: 'Fuego'
 },{
     id: 2,
-    name: 'el Arco del bosque',
-    weaponPwr: 45,
+    name: 'Arco del bosque',
+    description: 'Arco y flecha encantados con el poder del bosque, super efectivo contra enemigos tierra',
+    pAtk: 45,
     element: 'Planta'
 },{
     id: 3,
-    name: 'un Baculo de agua',
-    weaponPwr: 40,
+    name: 'Baculo de agua',
+    description: 'Un arma de hechicero con el poder del agua encantado, super efectivo contra enemigos Fuego',
+    pAtk: 40,
     element: 'Agua'
 },{
     id: 3,
-    name: 'un Hacha elemento tierra',
-    weaponPwr: 40,
+    name: 'Hacha elemento tierra',
+    description: 'Hacha legendaria creada por el pueblo enano especialmente encantada con el poder de la tierra, super efectiva contra enemigos agua',
+    pAtk: 40,
     element: 'Tierra'
 }]
 // Finaliza base de datos 
@@ -120,6 +124,7 @@ enemigosPrincipales.forEach((enemigos) => {
       <ul class="list-group list-group-flush">
         <label>Power Atack</label><li class="list-group-item">${enemigos.pAtk}</li>
         <label>Defense</label><li class="list-group-item">${enemigos.pDef}</li>
+        <label>Elemento</label><li class="list-group-item">${enemigos.element}</li>
         <label>Health Points</label><li class="list-group-item">${enemigos.healthPoints}</li>
       </ul>
       <div class="card-body">
@@ -129,28 +134,46 @@ enemigosPrincipales.forEach((enemigos) => {
 })
 //menu aside para inventario
 armasMedievales.forEach((armas) => {
-    document.getElementById('inventario').innerHTML += `<div class="card" style="width: 18rem;">
+    document.getElementById('inventario').innerHTML += `<div class="armasMargen"><div class="card" style="width: 18rem;">
     <img src="..." class="card-img-top" alt="...">
     <div class="card-body">
         <h5 class="card-title">${armas.name}</h5>
         <p class="card-text">${armas.description}</p>
-      </div>
-      <ul class="list-group list-group-flush">
+    </div>
+    <ul class="list-group list-group-flush">
         <label>Power Atack</label><li class="list-group-item">${armas.pAtk}</li>
-        <label>Health Points</label><li class="list-group-item">${armas.healthPoints}</li>
-      </ul>
-      <div class="card-body">
+        <label>Elemento</label><li class="list-group-item">${armas.element}</li>
+    </ul>
+    <div class="card-body">
         <a href="#" class="card-link" id="boton-elegir${armas.id}">Choose</a>
         <a href="#" class="card-link">Equip Weapon</a>
-      </div>
-</div>`
+    </div>
+    </div></div>`
 })
+
 let botonInventario = document.querySelector('.botonInv');
 let inventario = document.getElementById('inventario');
+let botonCloseInventario = document.querySelector(".contenedor-btn");
+let botonElegirWeapon = document.querySelectorAll('.btn-equip');
+
+botonElegirWeapon.forEach((singleBtn) => {
+    singleBtn.addEventListener('click', () => {
+        showInventario()
+    })
+})
+
+
+
+
+
+botonCloseInventario.addEventListener('click', () => {
+    inventario.style.transform = 'translateY(100%)'
+});
 
 botonInventario.addEventListener('click', () => {
-    inventario.style.transform = 'translateY(0)';
+    showInventario()
 })
+
 
 //eligiendo personaje principal.
 let personajeElegido = []
@@ -168,7 +191,7 @@ personajesPrincipales.forEach((personajes) =>{
 })
 // eligiendo enemigo para luchar.
 let enemigoElegido = []
-enemigosPrincipales.forEach((enemigos) =>{
+enemigosPrincipales.forEach((enemigos) => {
     const btnElegirEnemigos = `boton-elegir-enemigos${enemigos.id}`
     document.getElementById(btnElegirEnemigos).addEventListener('click', (event) => {
         const nodo = event.target;
@@ -226,5 +249,9 @@ function peleaConArma(){
         multiplier = 1
         console.log('meh, times ' + multiplier + ' multiplier.')}
 }
-peleaConArma()
+/// HELPER FUNCTION
+
+function showInventario() {
+    document.getElementById('inventario').style.transform = 'translateY(0)'
+}
 

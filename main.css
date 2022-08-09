@@ -11,6 +11,8 @@
     color: white;
 }
 aside {
+    background-color: #fafafa;
+    box-shadow: 0 0 70px 5px rgba(1, 1, 1, 0.5);
     display: flex;
     position: absolute;
     justify-content: space-around;
@@ -22,9 +24,18 @@ aside {
     transform: translateY(100%);
     transition: .3s linear all;
 }
-.contenedorBoton {
+.armasMargen {
+    margin: 2rem 0 2rem 0
+}
+/* buttons */
+
+.contenedor-btn {
     position: relative;
-    background-color: red;
+    background-color: transparent;
+    z-index: 1000;
+    top: 2%;
+    left: 2%;
+    width: 3rem;
 
 }
 
@@ -37,7 +48,9 @@ aside {
     border: 0;
     background-color: white;
 }
-
+.btn-close {
+    width: 100%;
+}
 .botonInv2 {
     background-color: red;
     position: absolute;
@@ -48,7 +61,6 @@ aside {
     z-index: 1200;
     background-color: white;
 }
-/* buttons */
 .primary-btn {
     box-shadow: 0px 5px 16px rgba(75, 75, 75, 0.2);
     border: none;
@@ -62,5 +74,13 @@ aside {
     color: blueviolet;
 }
 .btn-enemies {
+    color: red;
+}
+.pos-ab {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1000;
+    width: 15rem;
     color: red;
 }

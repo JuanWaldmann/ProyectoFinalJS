@@ -4,6 +4,9 @@
     align-items: center;
     padding: 20px;
 }
+main {
+    padding-bottom: 8rem;
+}
 .title {
     text-align: center;
 }
@@ -14,7 +17,7 @@ aside {
     background-color: #fafafa;
     box-shadow: 0 0 70px 5px rgba(1, 1, 1, 0.5);
     display: flex;
-    position: absolute;
+    position: fixed;
     justify-content: space-around;
     left: 0;
     width: 100%;
@@ -40,7 +43,8 @@ aside {
 }
 
 .botonInv {
-    position: absolute;
+    position: fixed;
+    background-color: transparent;
     left: 50%;
     bottom: 0;
     transform: translateX(-10%);

@@ -161,11 +161,10 @@ botonElegirWeapon.forEach((singleBtn) => {
         showInventario()
     })
 })
-
-
-
-
-
+let barraParry = document.getElementById('barraParry')
+barraParry.addEventListener('change', (e) =>{
+    console.log(e.value)
+})
 botonCloseInventario.addEventListener('click', () => {
     inventario.style.transform = 'translateY(100%)'
 });
@@ -249,6 +248,7 @@ function peleaConArma(){
         multiplier = 1
         console.log('meh, times ' + multiplier + ' multiplier.')}
 }
+
 /// HELPER FUNCTION
 
 function showInventario() {

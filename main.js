@@ -104,8 +104,8 @@ personajesPrincipales.forEach((personajes) => {
         <label>Health Points</label><li class="list-group-item">${personajes.healthPoints}</li>
       </ul>
       <div class="card-body">
-        <a href="#" class="card-link" id="boton-elegir${personajes.id}">Choose</a>
-        <a href="#" class="card-link">Equip Weapon</a>
+        <button class="primary-btn btn-choose" id="boton-elegir${personajes.id}">Choose</button>
+        <button class="primary-btn btn-equip">Equip Weapon</button>
       </div>
 </div>`
 })
@@ -123,8 +123,7 @@ enemigosPrincipales.forEach((enemigos) => {
         <label>Health Points</label><li class="list-group-item">${enemigos.healthPoints}</li>
       </ul>
       <div class="card-body">
-        <a href="#" class="card-link" id="boton-elegir-enemigos${enemigos.id}">Choose Enemy</a>
-        <a href="#" class="card-link">Fight</a>
+        <button class="primary-btn btn-enemies" id="boton-elegir-enemigos${enemigos.id}">Choose Enemy</button>
       </div>
 </div>`
 })

@@ -1,4 +1,7 @@
-// base de datos de los personajes principales del juego.
+// ===============================================================================
+//  BASE DE DATOS          
+// ===============================================================================
+// TODO - MIGRAR A UN NUEVO ARCHIVO.
 const personajesPrincipales = [{
     id: 1,
     name: 'Legolas',
@@ -94,7 +97,12 @@ const armasMedievales = [{
 }]
 // Finaliza base de datos 
 
-// mostrar personajes en cards
+
+// ===============================================================================
+//  1. FUNCIONALIDAD.           
+// ===============================================================================
+
+// === MUESTRA CARDS PERSONAJES ===
 personajesPrincipales.forEach((personajes) => {
     document.getElementById('namePersonajes').innerHTML += `<div class="card" style="width: 18rem;">
     <img src="..." class="card-img-top" alt="...">
@@ -113,7 +121,8 @@ personajesPrincipales.forEach((personajes) => {
       </div>
 </div>`
 })
-// mostrar enemigos en cards
+
+// === MUESTRA CARDS ENEMIGOS ===
 enemigosPrincipales.forEach((enemigos) => {
     document.getElementById('cards-enemigos').innerHTML += `<div class="card" style="width: 18rem;">
     <img src="..." class="card-img-top" alt="...">
@@ -132,7 +141,8 @@ enemigosPrincipales.forEach((enemigos) => {
       </div>
 </div>`
 })
-//menu aside para inventario
+
+// === MUESTRA CARDS WEAPONS ===
 armasMedievales.forEach((armas) => {
     document.getElementById('inventario').innerHTML += `<div class="armasMargen"><div class="card" style="width: 18rem;">
     <img src="..." class="card-img-top" alt="...">
@@ -145,38 +155,47 @@ armasMedievales.forEach((armas) => {
         <label>Elemento</label><li class="list-group-item">${armas.element}</li>
     </ul>
     <div class="card-body">
-        <a href="#" class="card-link" id="boton-elegir${armas.id}">Choose</a>
-        <a href="#" class="card-link">Equip Weapon</a>
+        <button class="card-link">Choose</button>
+        <button class="card-link equip-weapon" id="boton-elegir-arma${armas.id}">Equip Weapon</button>
     </div>
     </div></div>`
 })
+// ===============================================================================
+//  2. SELECTORS           
+// ===============================================================================
 
 let botonInventario = document.querySelector('.botonInv');
 let inventario = document.getElementById('inventario');
 let botonCloseInventario = document.querySelector(".contenedor-btn");
 let botonElegirWeapon = document.querySelectorAll('.btn-equip');
+let barraParry = document.getElementById('barraParry')
+let equipWeap = document.querySelectorAll('.equip-weapon')
+let personajeElegido = {}
+let enemigoElegido = {}
+let armaElegida = {}
+
+
+
 
 botonElegirWeapon.forEach((singleBtn) => {
     singleBtn.addEventListener('click', () => {
         showInventario()
     })
 })
-let barraParry = document.getElementById('barraParry')
-barraParry.addEventListener('change', (e) =>{
-    console.log(e.value)
-})
 botonCloseInventario.addEventListener('click', () => {
     inventario.style.transform = 'translateY(100%)'
 });
 
-botonInventario.addEventListener('click', () => {
-    showInventario()
+equipWeap.forEach((btnEquip) => {
+btnEquip.addEventListener('click', () => {
+        equip()
+    })
+})
+document.getElementById('pelea').addEventListener('click', () => {
+    pelea();
 })
 
-
-//eligiendo personaje principal.
-let personajeElegido = []
-
+// === CHOOSE MAIN CHARACTER ===
 personajesPrincipales.forEach((personajes) =>{
     const btnElegir = `boton-elegir${personajes.id}`
     document.getElementById(btnElegir).addEventListener('click', (event) => {
@@ -184,12 +203,12 @@ personajesPrincipales.forEach((personajes) =>{
         nodo.getAttribute('data-id')
         
         personajeElegido = personajes
-        console.log(personajeElegido)
+        localStorage.user = JSON.stringify(personajeElegido)
         console.log(`Has elegido a ${personajeElegido.name} como heroe para luchar`)
     })
 })
-// eligiendo enemigo para luchar.
-let enemigoElegido = []
+
+// === CHOOSE ENEMY ===
 enemigosPrincipales.forEach((enemigos) => {
     const btnElegirEnemigos = `boton-elegir-enemigos${enemigos.id}`
     document.getElementById(btnElegirEnemigos).addEventListener('click', (event) => {
@@ -200,21 +219,25 @@ enemigosPrincipales.forEach((enemigos) => {
     })
 })
 
-
-// Logica para un roll random entre 0 y 30 para agregar al P.atk
+// === GENERA NUMERO RANDOM PARA AGREGAR A LA BATALLA ===
 const generadorRoll = () => {
-    return Math.round(Math.random() * 30 )
+    let numero = Math.round(Math.random() * 30 )
+    console.log('roll personaje' + numero)
+    return numero;
 }
 const generadorRollEnemigo = () => {
-    return Math.round(Math.random() * 20 )
+    let numero = Math.round(Math.random() * 20 )
+    console.log('roll enemigo' + numero)
+    return numero;
 }
-//battle simulator
-let fight = function pelea() {
+
+// === BATTLE SIMULATOR ===
+function pelea() {
     let personajeElegidoPelea = personajeElegido 
     let enemigoElegidoPelea = enemigoElegido
+    console.log('hpInicial: ' + enemigoElegidoPelea.healthPoints);
     enemigoElegidoPelea.healthPoints -= Math.abs(multiplier * (generadorRoll() + personajeElegidoPelea.pAtk)) - enemigoElegidoPelea.pDef
     personajeElegidoPelea.healthPoints -= Math.abs(generadorRollEnemigo() + enemigoElegidoPelea.pAtk - personajeElegidoPelea.pDef)
-    
     if (enemigoElegidoPelea.healthPoints <= 0 ){
         console.log('Felicitaciones ganaste la pelea')
     }else if (enemigoElegidoPelea.healthPoints > 0 && personajeElegidoPelea.healthPoints > 0) {
@@ -224,24 +247,28 @@ let fight = function pelea() {
         
 }}
 
-document.getElementById('pelea').addEventListener('click', fight)
-//equip item.
+//============================ funcion equipar work in progress. todavia no anda.
 
 function equip(){
-    personajesPrincipales[0].pAtk += armasMedievales[0].weaponPwr
-    personajesPrincipales[0].element = armasMedievales[0].element
-    console.log('Has equipado ' + armasMedievales[0].name + ', tu poder de Ataque base es de ' + personajesPrincipales[0].pAtk + ' y ahora tu elemento es el ' + personajesPrincipales[0].element)
-}
+    armasMedievales.forEach((armas) => {
+    const btnElegirArma = `boton-elegir-arma${armas.id}`
+    document.getElementById(btnElegirArma).addEventListener('click', () => {
+        personajeElegido.pAtk += armaElegida.pAtk
+        personajeElegido.element = armaElegida.element
+        armasElegidaPelea = armaElegida
+        console.log('Has equipado ' + armaElegida.name + ', tu poder de Ataque base es de ' + personajeElegido.pAtk + ' y ahora tu elemento es el ' + personajeElegido.element)
+
+    })
+})}
 
 //batalla con multiplicador por elemento.
-var multiplier = 0
+var multiplier = 1
 
-function peleaConArma(){
-    
-    if ((personajesPrincipales[0].element === 'Tierra' && enemigosPrincipales[0].element === 'Agua') || (personajesPrincipales[0].element === 'Agua' && enemigosPrincipales[0].element === 'Fuego') || (personajesPrincipales[0].element === 'Fuego' && enemigosPrincipales[0].element === 'Planta') || (personajesPrincipales[0].element === 'Planta' && enemigosPrincipales[0].element === 'Tierra')) {
+function equipWeapon() {
+    if ((personajeElegido.element === 'Tierra' && enemigoElegido.element === 'Agua') || (personajeElegido.element === 'Agua' && enemigoElegido.element === 'Fuego') || (personajeElegido.element === 'Fuego' && enemigoElegido.element === 'Planta') || (personajeElegido.element === 'Planta' && enemigoElegido.element === 'Tierra')) {
         multiplier = 1.25
         return console.log('Super efectivo atacas con un multiplicador de ' + multiplier)
-    }else if ((personajesPrincipales[0].element === 'Agua' && enemigosPrincipales[0].element === 'Tierra') || (personajesPrincipales[0].element === 'Fuego' && enemigosPrincipales[0].element === 'Agua') || (personajesPrincipales[0].element === 'Planta' && enemigosPrincipales[0].element === 'Fuego') || (personajesPrincipales[0].element === 'Tierra' && enemigosPrincipales[0].element === 'Planta')){
+    }else if ((personajeElegido.element === 'Agua' && enemigoElegido.element === 'Tierra') || (personajeElegido.element === 'Fuego' && enemigoElegido.element === 'Agua') || (personajeElegido.element === 'Planta' && enemigoElegido.element === 'Fuego') || (personajeElegido.element === 'Tierra' && enemigoElegido.element === 'Planta')){
         multiplier = 0.75
         console.log('Not very efective, penalizacion activada, atacas con un multiplicador de' + multiplier)
     } else {
@@ -249,7 +276,9 @@ function peleaConArma(){
         console.log('meh, times ' + multiplier + ' multiplier.')}
 }
 
-/// HELPER FUNCTION
+// ===============================================================================
+//  3. HELPERS FUNCTIONS           
+// ===============================================================================
 
 function showInventario() {
     document.getElementById('inventario').style.transform = 'translateY(0)'

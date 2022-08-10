@@ -33,13 +33,13 @@ aside {
 /* buttons */
 
 .contenedor-btn {
-    position: relative;
+    position: absolute;
     background-color: transparent;
     z-index: 1000;
     top: 2%;
-    left: 2%;
+    left: 0%;
     width: 3rem;
-
+    
 }
 
 .botonInv {
@@ -80,11 +80,4 @@ aside {
 .btn-enemies {
     color: red;
 }
-.pos-ab {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 1000;
-    width: 15rem;
-    color: red;
-}
+

@@ -2,6 +2,11 @@
 //  BASE DE DATOS          
 // ===============================================================================
 // TODO - MIGRAR A UN NUEVO ARCHIVO.
+let personajeElegido = {}
+let enemigoElegido = {}
+let armaElegida = {}
+let multiplier = 0
+
 const personajesPrincipales = [{
     id: 1,
     name: 'Legolas',
@@ -9,7 +14,7 @@ const personajesPrincipales = [{
     description: 'Powerful Elf archer with great attack, and weak defense',
     pAtk: 85, 
     pDef: 65,
-    healthPoints: 75,
+    healthPoints: 50,
     speed: 7},
     {
     id: 2,
@@ -18,7 +23,7 @@ const personajesPrincipales = [{
     description: 'Legendary melee warrior, sword mastery, very strong defense weaker base attack',
     pAtk: 70,
     pDef: 80,
-    healthPoints: 85,
+    healthPoints: 120,
     speed: 5
     },{
     id: 3,
@@ -27,7 +32,7 @@ const personajesPrincipales = [{
     description: 'The gray wizard, very strong attack, low health points and very low defense',
     pAtk: 80,
     pDef: 55,
-    healthPoints: 65,
+    healthPoints: 35,
     speed: 6
     }]
     // base de datos de enemigos
@@ -89,12 +94,13 @@ const armasMedievales = [{
     pAtk: 40,
     element: 'Agua'
 },{
-    id: 3,
+    id: 4,
     name: 'Hacha elemento tierra',
     description: 'Hacha legendaria creada por el pueblo enano especialmente encantada con el poder de la tierra, super efectiva contra enemigos agua',
     pAtk: 40,
     element: 'Tierra'
 }]
+
 // Finaliza base de datos 
 
 
@@ -102,64 +108,93 @@ const armasMedievales = [{
 //  1. FUNCIONALIDAD.           
 // ===============================================================================
 
-// === MUESTRA CARDS PERSONAJES ===
+
+// === show CARDS PERSONAJES ===
 personajesPrincipales.forEach((personajes) => {
-    document.getElementById('namePersonajes').innerHTML += `<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-        <h5 class="card-title">${personajes.name}</h5>
-        <p class="card-text">${personajes.description}</p>
+    document.getElementById('namePersonajes').innerHTML += `<div class="cards-char"><div>
+    <img src="https://dummyimage.com/150x150/000/fff" alt="...">
+    <div>
+        <h5>${personajes.name}</h5>
+        <p>${personajes.description}</p>
       </div>
-      <ul class="list-group list-group-flush">
-        <label>Power Atack</label><li class="list-group-item">${personajes.pAtk}</li>
-        <label>Defense</label><li class="list-group-item">${personajes.pDef}</li>
-        <label>Health Points</label><li class="list-group-item">${personajes.healthPoints}</li>
+      <ul class="stats">
+        <label class="p-atk">Power Atack</label><li>${personajes.pAtk}</li>
+        <label class="p-def">Defense</label><li>${personajes.pDef}</li>
+        <div class="pos-rel"><label class="hp">Health Points</label><div class="contenedorHp"><input type="range" id="hpPersonaje${personajes.id}" class="inputRange" style="width: ${personajes.healthPoints * 2}px"; disabled min=0 max=180></div><label class="hpNegro">${personajes.healthPoints}</label></div>
       </ul>
-      <div class="card-body">
+      <div>
         <button class="primary-btn btn-choose" id="boton-elegir${personajes.id}">Choose</button>
         <button class="primary-btn btn-equip">Equip Weapon</button>
       </div>
-</div>`
+</div></div>`
 })
 
-// === MUESTRA CARDS ENEMIGOS ===
+// === show CARDS ENEMIGOS ===
 enemigosPrincipales.forEach((enemigos) => {
-    document.getElementById('cards-enemigos').innerHTML += `<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-        <h5 class="card-title">${enemigos.name}</h5>
-        <p class="card-text">${enemigos.description}</p>
+    document.getElementById('cards-enemigos').innerHTML += `<div class="cards-enemys"><div>
+    <img src="https://dummyimage.com/150x150/000/fff" alt="...">
+    <div>
+        <h5>${enemigos.name}</h5>
+        <p>${enemigos.description}</p>
       </div>
-      <ul class="list-group list-group-flush">
-        <label>Power Atack</label><li class="list-group-item">${enemigos.pAtk}</li>
-        <label>Defense</label><li class="list-group-item">${enemigos.pDef}</li>
-        <label>Elemento</label><li class="list-group-item">${enemigos.element}</li>
-        <label>Health Points</label><li class="list-group-item">${enemigos.healthPoints}</li>
+      <ul class="stats">
+        <label class="p-atk">Power Atack</label><li>${enemigos.pAtk}</li>
+        <label class="p-def">Defense</label><li>${enemigos.pDef}</li>
+        <div class="pos-rel"><label class="hp">Health Points</label><div class="contenedorHp"><input type="range" id="hpPersonaje${enemigos.id}" class="inputRange" style="width: ${enemigos.healthPoints * 2}px"; disabled min=0 max=180></div><label class="hpNegro">${enemigos.healthPoints}</label></div>
       </ul>
-      <div class="card-body">
-        <button class="primary-btn btn-enemies" id="boton-elegir-enemigos${enemigos.id}">Choose Enemy</button>
+      <div>
+        <button class="primary-btn btn-choose" id="boton-elegir-enemigos${enemigos.id}">Choose</button>
+        <button class="primary-btn btn-equip">Equip Weapon</button>
       </div>
-</div>`
+</div></div>`
 })
 
-// === MUESTRA CARDS WEAPONS ===
+// === show CARDS WEAPONS ===
 armasMedievales.forEach((armas) => {
-    document.getElementById('inventario').innerHTML += `<div class="armasMargen"><div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-        <h5 class="card-title">${armas.name}</h5>
-        <p class="card-text">${armas.description}</p>
+    document.getElementById('inventario').innerHTML += `<div class="armas-container"><div class="card cardsss" style="width: 18rem;">
+    <div class="foto-container">
+        <img src="..." class="" alt="...">
     </div>
-    <ul class="list-group list-group-flush">
-        <label>Power Atack</label><li class="list-group-item">${armas.pAtk}</li>
-        <label>Elemento</label><li class="list-group-item">${armas.element}</li>
+    <div class="">
+        <h5 class="">${armas.name}</h5>
+        <p class="">${armas.description}</p>
+    </div>
+    <ul class="statsArmas">
+        <label>Power Atack</label><li class="">${armas.pAtk}</li>
+        <label>Elemento</label><li class="">${armas.element}</li>
     </ul>
-    <div class="card-body">
-        <button class="card-link">Choose</button>
-        <button class="card-link equip-weapon" id="boton-elegir-arma${armas.id}">Equip Weapon</button>
+    <div class="">
+        <button>Choose</button>
+        <button class="" id="boton-elegir-arma${armas.id}">Equip Weapon</button>
     </div>
     </div></div>`
 })
+
+//====== show PERSONAJE ELEGIDO ========
+function showCharacter() {
+document.getElementById('personaje-elegido').innerHTML = `<div class="char-container"><div class="foto-char">
+<div class="foto-name">
+  <h3 class="name-char">${personajeElegido.name}</h3>
+  <img src="https://dummyimage.com/150x150/000/fff" alt="">
+</div>
+</div>
+<div class="info-char">
+<ul class="stats">
+        <label class="p-atk">Power Atack</label><li>${personajeElegido.pAtk}</li>
+        <label class="p-def">Defense</label><li>${personajeElegido.pDef}</li>
+        <div class="elegido"><label class="hp">Health Points</label><div class="contenedorHp"><input type="range" id="hpPersonaje${personajeElegido.id}" class="inputRange" style="width: ${personajeElegido.healthPoints} px"; disabled min=0 max=180></div><label class="hpNegro">${personajeElegido.healthPoints}</label></div>
+      </ul>
+    </div>
+</div>
+<div id="showWeapon" class="weapon-container">
+<h5></h5>
+</div>
+<div id="show-enemy" class="enemy-container">
+<h5></h5>
+</div>`
+}
+
+
 // ===============================================================================
 //  2. SELECTORS           
 // ===============================================================================
@@ -170,10 +205,9 @@ let botonCloseInventario = document.querySelector(".contenedor-btn");
 let botonElegirWeapon = document.querySelectorAll('.btn-equip');
 let barraParry = document.getElementById('barraParry')
 let equipWeap = document.querySelectorAll('.equip-weapon')
-let personajeElegido = {}
-let enemigoElegido = {}
-let armaElegida = {}
-
+let showChar = document.querySelectorAll('.cards-char')
+let showEne = document.querySelectorAll('.cards-enemys')
+let btnElegir = document.querySelectorAll('.cards-char')
 
 
 
@@ -186,33 +220,81 @@ botonCloseInventario.addEventListener('click', () => {
     inventario.style.transform = 'translateY(100%)'
 });
 
-equipWeap.forEach((btnEquip) => {
-btnEquip.addEventListener('click', () => {
-        equip()
+showEne.forEach((cardEne) => {
+    cardEne.addEventListener('click', () => {
+        showEnemy()
     })
 })
+showChar.forEach((cardChar) => {
+    cardChar.addEventListener('click', () => {
+        showCharacter()
+    })
+})
+
 document.getElementById('pelea').addEventListener('click', () => {
     pelea();
 })
 
 // === CHOOSE MAIN CHARACTER ===
+
 personajesPrincipales.forEach((personajes) =>{
     const btnElegir = `boton-elegir${personajes.id}`
-    document.getElementById(btnElegir).addEventListener('click', (event) => {
-        const nodo = event.target;
-        nodo.getAttribute('data-id')
-        
+    document.getElementById(btnElegir).addEventListener('click', (e) => {
+        const nodo = e.target;
+        nodo.getAttribute = 'data-id'
         personajeElegido = personajes
-        localStorage.user = JSON.stringify(personajeElegido)
         console.log(`Has elegido a ${personajeElegido.name} como heroe para luchar`)
-    })
-})
+        console.log(personajeElegido)  
+            })
+        })
+  
+
+
+
+///////////////
+
+/// === EQUIPPED WEAPON ===
+function showWeapon() {
+    document.getElementById('showWeapon').innerHTML = `<div class="weapon-container"><div class="foto-char">
+    <div class="foto-name">
+      <h3 class="name-char">${armaElegida.name}</h3>
+      <img src="https://dummyimage.com/150x150/000/fff" alt="">
+    </div>
+    </div>
+    <div class="info-weapon">
+    <ul class="stats">
+            <label class="p-atk">Power Atack</label><li>${armaElegida.pAtk}</li>
+            <label class="p-def">Element</label><li>${armaElegida.element}</li>
+            <div class="elegido"><label class="hp">Health Points</label><div class="contenedorHp"><input type="range" id="hpPersonaje${personajeElegido.id}" class="inputRange" style="width: ${personajeElegido.healthPoints} px"; disabled min=0 max=180></div><label class="hpNegro">${personajeElegido.healthPoints}</label></div>
+          </ul>
+        </div>
+        </div>    
+        `
+    }
+
+// === SHOw CHOSEN ENEMY READY TO BATTLE ===
+function showEnemy() {
+    document.getElementById('show-enemy').innerHTML = `<div class="foto-char">
+    <div class="foto-name">
+      <h3 class="name-char">${enemigoElegido.name}</h3>
+      <img src="https://dummyimage.com/150x150/000/fff" alt="">
+    </div>
+    </div>
+    <div class="info-weapon">
+    <ul class="stats">
+            <label class="p-atk">Power Atack</label><li>${enemigoElegido.pAtk}</li>
+            <label class="p-def">Element</label><li>${enemigoElegido.element}</li>
+            <div class="elegido"><label class="hp">Health Points</label><div class="contenedorHp"><input type="range" id="hpPersonaje${personajeElegido.id}" class="inputRange" style="width: ${personajeElegido.healthPoints} px"; disabled min=0 max=180></div><label class="hpNegro">${personajeElegido.healthPoints}</label></div>
+          </ul>
+        </div>`
+    }
+
 
 // === CHOOSE ENEMY ===
 enemigosPrincipales.forEach((enemigos) => {
     const btnElegirEnemigos = `boton-elegir-enemigos${enemigos.id}`
-    document.getElementById(btnElegirEnemigos).addEventListener('click', (event) => {
-        const nodo = event.target;
+    document.getElementById(btnElegirEnemigos).addEventListener('click', (e) => {
+        const nodo = e.target;
         nodo.getAttribute('data-id')
         enemigoElegido = enemigos
         console.log(`Has elegido a ${enemigoElegido.name} para atacar, mucha suerte`)
@@ -236,7 +318,7 @@ function pelea() {
     let personajeElegidoPelea = personajeElegido 
     let enemigoElegidoPelea = enemigoElegido
     console.log('hpInicial: ' + enemigoElegidoPelea.healthPoints);
-    enemigoElegidoPelea.healthPoints -= Math.abs(multiplier * (generadorRoll() + personajeElegidoPelea.pAtk)) - enemigoElegidoPelea.pDef
+    enemigoElegidoPelea.healthPoints -= Math.abs(multiplier * (generadorRoll() + personajeElegidoPelea.pAtk + armaElegida.pAtk)) - enemigoElegidoPelea.pDef
     personajeElegidoPelea.healthPoints -= Math.abs(generadorRollEnemigo() + enemigoElegidoPelea.pAtk - personajeElegidoPelea.pDef)
     if (enemigoElegidoPelea.healthPoints <= 0 ){
         console.log('Felicitaciones ganaste la pelea')
@@ -249,22 +331,22 @@ function pelea() {
 
 //============================ funcion equipar work in progress. todavia no anda.
 
-function equip(){
-    armasMedievales.forEach((armas) => {
+armasMedievales.forEach((armas) => {
     const btnElegirArma = `boton-elegir-arma${armas.id}`
     document.getElementById(btnElegirArma).addEventListener('click', () => {
-        personajeElegido.pAtk += armaElegida.pAtk
+        armaElegida = armas
         personajeElegido.element = armaElegida.element
-        armasElegidaPelea = armaElegida
-        console.log('Has equipado ' + armaElegida.name + ', tu poder de Ataque base es de ' + personajeElegido.pAtk + ' y ahora tu elemento es el ' + personajeElegido.element)
-
+        console.log('Has equipado ' + armaElegida.name + ', tu poder de Ataque base es de ' + personajeElegido.pAtk + ' y ahora tu elemento es ' + personajeElegido.element) 
+        calcularMultiplier() 
+        showWeapon()     
     })
-})}
+})
 
-//batalla con multiplicador por elemento.
-var multiplier = 1
 
-function equipWeapon() {
+//batalla con multiplicador por elemento. work in progress.
+
+
+function calcularMultiplier() {
     if ((personajeElegido.element === 'Tierra' && enemigoElegido.element === 'Agua') || (personajeElegido.element === 'Agua' && enemigoElegido.element === 'Fuego') || (personajeElegido.element === 'Fuego' && enemigoElegido.element === 'Planta') || (personajeElegido.element === 'Planta' && enemigoElegido.element === 'Tierra')) {
         multiplier = 1.25
         return console.log('Super efectivo atacas con un multiplicador de ' + multiplier)
@@ -284,3 +366,30 @@ function showInventario() {
     document.getElementById('inventario').style.transform = 'translateY(0)'
 }
 
+// ===============================================================================
+//  4. ANIMATION FUNCTIONS           
+// ===============================================================================
+
+function myMove() {
+    var elem = document.getElementById("myAnimation");   
+    var pos = 0;
+    var id = setInterval(frame, 5);
+    elem.addEventListener('keydown', () => {
+        if(pos >= 125 && pos <= 135){
+            clearInterval(id);
+        }else {
+            console.log('error')
+        }
+            
+        
+    })
+    
+    function frame() {
+      if (pos == 250) {
+        clearInterval(id);
+      } else {
+        pos++;  
+        elem.style.left = pos * 2 + 'px'; 
+      }
+    }
+  }

@@ -11,14 +11,14 @@
     <script src="https://kit.fontawesome.com/6418402223.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="main.css">
 </head>
-<body>
+<body class="bg-color">
     <header>
-        <h1>Welcome to the Battle</h1>
+        <h1 class="title">Welcome to the Battle</h1>
     </header>
 
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg bg-secondary bg-color">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
+          <a class="navbar-brand" href="#">Epic Battle Game</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -28,21 +28,10 @@
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+                <a class="nav-link" href="#">Rules</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
+                <a href='#' class="nav-link">NFT Marketplace</a>
               </li>
             </ul>
             <form class="d-flex" role="search">
@@ -52,19 +41,34 @@
           </div>
         </div>
       </nav>
-      <main>    
+      <main> 
+           
         <div class="title">
           <h2>Choose your Hero</h2>
           
         </div>
-      <section id="namePersonajes" class="card-container">
-
+        <div class="d-flex justify-content-center">
+          <p>
+            <button onclick="myMove()">Click Me</button> 
+          </p>
+          
+          <div id ="myContainer">
+            <div id ="myAnimation"></div>
+            <div id="item"></div>
+          </div>
+        </div>
+        <section class="char-info-container" id="personaje-elegido">
       </section>
+      <section>
+        <div id="namePersonajes" class="container-card">
       
+        </div>
+        
+      </section>
         <div class="title">
             <h2>Choose your enemy wisely</h2>
         </div>
-          <section class="card-container" id="cards-enemigos">
+          <section class="container-card" id="cards-enemigos">
           </section>
           <section>
               <button type="button" class="btn btn-primary btn-lg" id="pelea">Fight</button>

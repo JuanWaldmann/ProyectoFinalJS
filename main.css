@@ -1,204 +1,237 @@
 .container-card {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    padding: 20px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	padding: 20px;
 }
 
 main {
-    padding-bottom: 8rem;
+	padding-bottom: 8rem;
 }
 .title {
-    text-align: center;
+	text-align: center;
 }
 .container-fluid {
-    color: white;
+	color: white;
 }
-.bg-color{
-    background: rgb(210,210,210);
-    background: linear-gradient(103deg, rgba(210,210,210,1) 1%, rgba(145,145,145,1) 32%, rgba(131,121,140,1) 65%, rgba(114,111,116,1) 79%, rgba(65,7,115,1) 100%);
+.bg-color {
+	background: rgb(210, 210, 210);
+	background: linear-gradient(
+		103deg,
+		rgba(210, 210, 210, 1) 1%,
+		rgba(145, 145, 145, 1) 32%,
+		rgba(131, 121, 140, 1) 65%,
+		rgba(114, 111, 116, 1) 79%,
+		rgba(65, 7, 115, 1) 100%
+	);
 }
 aside {
-    background: rgb(210,210,210);
-    background: linear-gradient(103deg, rgba(210,210,210,1) 1%, rgba(145,145,145,1) 32%, rgba(131,121,140,1) 65%, rgba(114,111,116,1) 79%, rgba(65,7,115,1) 100%);
-    box-shadow: 0 0 70px 5px rgba(1, 1, 1, 0.5);
-    display: flex;
-    position: fixed;
-    justify-content: space-around;
-    align-items: center;
-    left: 0;
-    width: 100%;
-    margin: 0 auto;
-    bottom: 0;
-    z-index: 1000;
-    transform: translateY(100%);
-    transition: .3s linear all;
-
+	background: rgb(210, 210, 210);
+	background: linear-gradient(
+		103deg,
+		rgba(210, 210, 210, 1) 1%,
+		rgba(145, 145, 145, 1) 32%,
+		rgba(131, 121, 140, 1) 65%,
+		rgba(114, 111, 116, 1) 79%,
+		rgba(65, 7, 115, 1) 100%
+	);
+	box-shadow: 0 0 70px 5px rgba(1, 1, 1, 0.5);
+	display: flex;
+	position: fixed;
+	justify-content: space-around;
+	align-items: center;
+	left: 0;
+	width: 100%;
+	margin: 0 auto;
+	bottom: 0;
+	z-index: 1000;
+	transform: translateY(100%);
+	transition: 0.3s linear all;
 }
 /* #inventario {
     display: none;
 } */
-.cards-char, .cards-enemys {
-    background: rgb(210,210,210);
-    background: linear-gradient(259deg, rgba(210,210,210,1) 0%, rgba(93,93,93,1) 0%, rgba(255,211,135,0.8914916308320203) 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: solid 3px rgb(0, 0, 0);
-    border-radius: 20px;
-    width: 300px;
-    height: auto;
-    padding: 20px;
-
+.cards-char,
+.single-card-containerEne {
+	background: rgb(210, 210, 210);
+	background: linear-gradient(
+		259deg,
+		rgba(210, 210, 210, 1) 0%,
+		rgba(93, 93, 93, 1) 0%,
+		rgba(255, 211, 135, 0.8914916308320203) 100%
+	);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: solid 3px rgb(0, 0, 0);
+	border-radius: 20px;
+	width: 300px;
+	height: auto;
+	padding: 20px;
 }
 .div {
-    width: fit-content;
+	width: fit-content;
 }
 .char-info-container {
-    display: flex;
-    justify-content: flex-start;
-    padding: 2rem;
+    display: flex;      
+	justify-content: flex-start;
+	padding: 2rem;
 }
 .foto-char {
-    margin: 20px;
+	margin: 20px;
 }
 .name-char {
-    font-weight: bolder;
-    font-size: 2rem;
+	font-weight: bolder;
+	font-size: 2rem;
 }
-.info-char, .info-weapon {
-    display: flex;
-    border: solid 3px rgb(0, 0, 0);
-    border-radius: 10px;
-    text-align: start;
-    padding-top: 20px;
-    background: rgb(210,210,210);
-    background: linear-gradient(259deg, rgba(210,210,210,1) 0%, rgba(93,93,93,1) 0%, rgba(255,211,135,0.8914916308320203) 100%);
-}
-.hp, .p-atk, .p-def {
-    font-weight: 500;
-    padding: 5px;
-    color: rgba(81, 106, 0, 0.678);
-}
-.white{
-    color: white;
-}
-.char-container, .weapon-container, .enemy-container {
-    border: solid black 2px;
-    border-radius: -25px;
-    height: 30%;
-    display: flex;
+.info-char,
+.info-weapon {
+	display: flex;
+	border: solid 3px rgb(0, 0, 0);
+	border-radius: 10px;
+	text-align: start;
+	padding-top: 20px;
+	background: rgb(210, 210, 210);
+	background: linear-gradient(
+		259deg,
+		rgba(210, 210, 210, 1) 0%,
+		rgba(93, 93, 93, 1) 0%,
+		rgba(255, 211, 135, 0.8914916308320203) 100%
+	);
 
+    padding-right: 0.5rem;
+}
+.hp,
+.p-atk,
+.p-def {
+	font-weight: 500;
+	padding: 5px;
+	color: rgba(81, 106, 0, 0.678);
+}
+.white {
+	color: white;
+}
+.char-container,
+.weapon-container,
+.enemy-container {
+	border: solid black 2px;
+	border-radius: -25px;
+	height: 30%;
+	display: flex;
 }
 
 .cardsss {
-    margin: 20px;
-    height: 350px;
-    width: 350px;
-    box-shadow: 0px 5px 16px rgba(75, 75, 75, 0.2);
-    padding: 25px;
-    background: rgb(210,210,210);
-    background: linear-gradient(259deg, rgba(210,210,210,1) 0%, rgba(93,93,93,1) 0%, rgba(255,211,135,0.8914916308320203) 100%);
+	margin: 20px;
+	height: 350px;
+	width: 350px;
+	box-shadow: 0px 5px 16px rgba(75, 75, 75, 0.2);
+	padding: 25px;
+	background: rgb(210, 210, 210);
+	background: linear-gradient(
+		259deg,
+		rgba(210, 210, 210, 1) 0%,
+		rgba(93, 93, 93, 1) 0%,
+		rgba(255, 211, 135, 0.8914916308320203) 100%
+	);
 }
-.foto-container{
-    height: 35%;
+.foto-container {
+	height: 35%;
 }
 
-.stats, .statsArmas {
-    list-style-type: none;
-    font-weight: 500;
-    color: rgba(3, 16, 99, 0.678);
+.stats,
+.statsArmas {
+	list-style-type: none;
+	font-weight: 500;
+	color: rgba(3, 16, 99, 0.678);
 }
 /* buttons */
 
 .contenedor-btn {
-    position: absolute;
-    background-color: transparent;
-    z-index: 1000;
-    top: 2%;
-    left: 0%;
-    width: 3rem;
-    
+	position: absolute;
+	background-color: transparent;
+	z-index: 1000;
+	top: 2%;
+	left: 0%;
+	width: 3rem;
 }
 
 .botonInv {
-    position: fixed;
-    background-color: transparent;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-10%);
-    outline: none;
-    border: 0;
-    background-color: white;
+	position: fixed;
+	background-color: transparent;
+	left: 50%;
+	bottom: 0;
+	transform: translateX(-10%);
+	outline: none;
+	border: 0;
+	background-color: white;
 }
 .btn-close {
-    width: 100%;
+	width: 100%;
 }
 .botonInv2 {
-    background-color: red;
-    position: absolute;
-    left: 0;
-    top: 0;
-    outline: none;
-    border: 0;
-    z-index: 1200;
-    background-color: white;
+	background-color: red;
+	position: absolute;
+	left: 0;
+	top: 0;
+	outline: none;
+	border: 0;
+	z-index: 1200;
+	background-color: white;
 }
 .primary-btn {
-    box-shadow: 0px 5px 16px rgba(75, 75, 75, 0.2);
-    border: none;
-    border-radius: 10px;
-    padding: 0.2rem 1rem;
+	box-shadow: 0px 5px 16px rgba(75, 75, 75, 0.2);
+	border: none;
+	border-radius: 10px;
+	padding: 0.2rem 1rem;
 }
 .btn-choose {
-    color: rgba(171, 22, 22, 0.826);
+	color: rgba(171, 22, 22, 0.826);
 }
 .btn-equip {
-    color: blueviolet;
+	color: blueviolet;
 }
 .btn-enemies {
-    color: red;
+	color: red;
 }
 .contenedorHp {
-    background-color: #fafafa;
-    width: 180px;
-    height: 20px;
-    border-radius: 5px;
-    border: solid black 2px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	background-color: #fafafa;
+	width: 180px;
+	height: 20px;
+	border-radius: 5px;
+	border: solid black 2px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 .pos-rel {
-    position: relative;
-    bottom: 0;
-    left: 0;
+	position: relative;
+	bottom: 0;
+	left: 0;
 }
 .elegido {
-    position: relative;
-    bottom: 0;
-
+	position: relative;
+	bottom: 0;
 }
 .inputRange {
-    background: red;
-    height: 20px;
-    border-radius: 5px;
-    -webkit-appearance: none;
-    outline: none;
-    opacity: 0.9;
-    border: solid black 3px;
+	background: red;
+	height: 16px;
+	-webkit-appearance: none;
+	outline: none;
+	opacity: 0.9;
+	border: solid black 3px;
 }
 
-.hpNegro, li {
-    color: black;
-    text-align: justify;
-    font-weight: 500;
-    font-size: large;
+.hpNegro,
+li {
+	color: black;
+	text-align: justify;
+	font-weight: 500;
+	font-size: large;
 }
 .hpNegro {
-    position: relative;
-    left: 153px;
-    bottom: 24px;
+	position: relative;
+	left: 153px;
+	bottom: 24px;
 }
 /* .inputRange::-webkit-slider-runnable-track {
     opacity: 0;
@@ -217,27 +250,25 @@ aside {
 */
 
 .inputRange::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    opacity: 0;
+	-webkit-appearance: none;
+	appearance: none;
+	opacity: 0;
 }
 
 .inputRange::-moz-range-thumb {
-    opacity: 0;
-} 
-
+	opacity: 0;
+}
 
 /*  ============== ================= CSS DE PRUEBA ============== */
 #myContainer {
-width: 500px;
-height: 20px;
-position: relative;
-background: DarkSeaGreen ;
+	width: 500px;
+	height: 20px;
+	position: relative;
+	background: DarkSeaGreen;
 }
 #myAnimation {
-width: 20px;
-height: 20px;
-position: absolute;
-background-color: Maroon ;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	background-color: Maroon;
 }
-

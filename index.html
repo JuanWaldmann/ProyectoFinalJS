@@ -1,93 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
 
-    <!-- Link cdn bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/6418402223.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="main.css">
-</head>
-<body class="bg-color">
-    <header>
-        <h1 class="title">Welcome to the Battle</h1>
-    </header>
+		<!-- Link cdn bootstrap -->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://kit.fontawesome.com/6418402223.js"
+			crossorigin="anonymous"
+		></script>
+		<link rel="stylesheet" href="main.css" />
+	</head>
+	<body class="bg-color">
+		<header>
+			<h1 class="title">Welcome to the Battle</h1>
+		</header>
 
-    <nav class="navbar navbar-expand-lg bg-secondary bg-color">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Epic Battle Game</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Rules</a>
-              </li>
-              <li class="nav-item">
-                <a href='#' class="nav-link">NFT Marketplace</a>
-              </li>
-            </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-          </div>
-        </div>
-      </nav>
-      <main> 
-           
-        <div class="title">
-          <h2>Choose your Hero</h2>
-          
-        </div>
-        <div class="d-flex justify-content-center">
-          <p>
-            <button onclick="myMove()">Click Me</button> 
-          </p>
-          
-          <div id ="myContainer">
-            <div id ="myAnimation"></div>
-            <div id="item"></div>
-          </div>
-        </div>
-        <section class="char-info-container" id="personaje-elegido">
-      </section>
-      <section>
-        <div id="namePersonajes" class="container-card">
-      
-        </div>
+		<nav class="navbar navbar-expand-lg bg-secondary bg-color">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">Epic Battle Game</a>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="#">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Rules</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">NFT Marketplace</a>
+						</li>
+					</ul>
+					<form class="d-flex" role="search">
+						<input
+							class="form-control me-2"
+							type="search"
+							placeholder="Search"
+							aria-label="Search"
+						/>
+						<button class="btn btn-outline-success" type="submit">
+							Search
+						</button>
+					</form>
+				</div>
+			</div>
+		</nav>
+		<main>
+			<div class="title">
+				<h2>Choose your Hero</h2>
+			</div>
+			<div class="d-flex justify-content-center">
+				<p>
+					<button onclick="myMove()">Click Me</button>
+				</p>
+
+				<div id="myContainer">
+					<div id="myAnimation"></div>
+					<div id="item"></div>
+				</div>
+			</div>
+			<section class="char-info-container" id="personaje-elegido">
         
       </section>
-        <div class="title">
-            <h2>Choose your enemy wisely</h2>
-        </div>
-          <section class="container-card" id="cards-enemigos">
-          </section>
-          <section>
-              <button type="button" class="btn btn-primary btn-lg" id="pelea">Fight</button>
-          </section>
-    </main>
-    
-    <aside id="inventario">
-      <div class="contenedor-btn">
-        <button class="btn-close secondary-btn"></button>
-        
-      </div>  
-            
-    </aside>
-    
-    
-    <footer>
+			<section>
+				<div id="namePersonajes" class="container-card"></div>
+			</section>
+			<div class="title">
+				<h2>Choose your enemy wisely</h2>
+			</div>
+			<section class="container-card" id="cards-enemigos"></section>
+			<section>
+				<button type="button" class="btn btn-primary btn-lg" id="pelea">
+					Fight
+				</button>
+			</section>
+		</main>
 
-    </footer>
-    <script src="main.js"></script>
-    
-</body>
+		<aside id="inventario">
+			<div class="contenedor-btn">
+				<button class="btn-close secondary-btn"></button>
+			</div>
+		</aside>
+
+		<footer></footer>
+		<script src="main.js"></script>
+	</body>
 </html>

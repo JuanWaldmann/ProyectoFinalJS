@@ -26,7 +26,7 @@ const personajesPrincipales = [
             "Legendary melee warrior, sword mastery, very strong defense weaker base attack",
         pAtk: 70,
         pDef: 80,
-        healthPoints: 120,
+        healthPoints: 500,
         speed: 5,
     },
     {
@@ -137,7 +137,7 @@ personajesPrincipales.forEach((personajes) => {
     document.getElementById("namePersonajes").innerHTML += `   
     <div class="single-card-container" id=${personajes.id}> 
             <div class="cards-char"><div>
-            <img src="https://dummyimage.com/150x150/000/fff" alt="...">
+            <img src="https://dummyimage.com/150x150/000/fff" alt="Foto-personaje">
             <div>
                 <h5>${personajes.name}</h5>
                 <p>${personajes.description}</p>
@@ -267,46 +267,49 @@ function showCharacter() {
 </div>`;
 }
 // ========================== muestra cards modal para batalla ==========================
-function loadModal() {
-modal.insertAdjacentHTML = `<div class="char-fight-container"><div class="foto-char">
-<div class="foto-name">
-  <h3 class="name-char">${personajeElegido.name}</h3>
-  <img src="https://dummyimage.com/150x150/000/fff" alt="">
-</div>
-</div>
-<div class="info-char">
-<ul class="stats">
-        <label class="p-atk">Power Atack</label><li>${
-                    personajeElegido.pAtk
-                }</li>
-        <label class="p-def">Defense</label><li>${personajeElegido.pDef}</li>
-        <div class="elegido">
-            <label class="hp">Health Points</label>
-            <div class="contenedorHp">
-            <input 
-            type="range" 
-            id="hpPersonaje${personajeElegido.id}" 
-            class="inputRange" 
-            style="width: ${
-                            personajeElegido.healthPoints * 2
-                        }px; border: none; outline: none;"
-            disabled 
-            min=0
-            max=180>
-            </div>
-            <label class="hpNegro">${personajeElegido.healthPoints}</label>
+function loadModal(personajeElegido, enemigoElegido) {
+modalContent.innerHTML = `
+<div class="fight-master-container">
+    <article class="single-card-container-fight">
+        <div class="card-upper">
+            <h2 class="upper-name">${personajeElegido.name}</h2>
+            <span class="upper-hp">
+                <div class="contenedorHp">
+                    <input type="range" id="hpPersonaje${personajeElegido.id}" class="inputRange" style="width: ${personajeElegido.healthPoints}px"; disabled min=0 max=180>
+                </div>
+                <label class="hpNegro">${personajeElegido.healthPoints}</label>
+            </span>
         </div>
-      </ul>
-    </div>
-</div>
+        <div class="card-bottom">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="">
+        </div>
+    </article>
+    <article class="single-card-container-fight">
+        <div class="card-upper">
+            <h2 class="upper-name">${enemigoElegido.name}</h2>
+            <span class="upper-hp">
+                <div class="contenedorHp">
+                    <input type="range" id="hpPersonaje${enemigoElegido.id}" class="inputRange" style="width: ${enemigoElegido.healthPoints}px"; disabled min=0 max=180>
+                </div>
+                <label class="hpNegro">${enemigoElegido.healthPoints}</label>
+            </span>
+        </div>
+        <div class="card-bottom">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/6.png" alt="">
+        </div>
+    </article>
 </div>`
 }
 
-const getInfo = () => {
-    fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
-        .then((response) => response.json)
-        .then(info => {
-            console.log(info)
+const getInfo = async () => {
+    await fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
+        .then((response) => {
+            return response.json();
+        })
+        .then(data => {
+            console.log(data)
+        }).catch((error) => {
+            console.log(error);
         })
     }
 getInfo()
@@ -327,7 +330,7 @@ let showEne = document.querySelectorAll(".single-card-containerEne");
 let btnElegir = document.querySelectorAll(".cards-char");
 let modal = document.getElementById("modal-fight");
 let openModal = document.getElementById('open-modal')
-
+let modalContent = document.querySelector('.modal-content')
 
 botonElegirWeapon.forEach((singleBtn) => {
     singleBtn.addEventListener("click", () => {
@@ -381,7 +384,7 @@ window.addEventListener('click', (e) => {
 })
 openModal.addEventListener("click", () => {
     modal.style.display = "block";
-    loadModal()
+    loadModal(personajeElegido, enemigoElegido)
 });
 
 // === CHOOSE MAIN CHARACTER ===

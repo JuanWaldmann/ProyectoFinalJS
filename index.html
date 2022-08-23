@@ -65,34 +65,40 @@
 			</div>
 		</nav>
 		<main>
-			<div class="title">
+			<div class="title" id="page-top">
 				<h2>Choose your Hero</h2>
 			</div>
-			<div class="d-flex justify-content-center">
-				<p>
-					<button onclick="myMove()">Click Me</button>
-				</p>
+			
 
-				<div id="myContainer">
-					<div id="myAnimation"></div>
-					<div id="item"></div>
-				</div>
-			</div>
+			
 			<section class="char-info-container" id="personaje-elegido">
-        
-      </section>
+				
+      		</section>
+			<section>
+				<div class="modal" id="modal-fight">
+					<div class="modal-content">
+
+					</div>
+				</div>
+			</section>
 			<section>
 				<div id="namePersonajes" class="container-card"></div>
+				<div>
+					<button type="button" class="btn-equip btn btn-warning btn-lg">
+						Open Inventory
+					</button>
+				</div>
+				<div>
+					<button type="button" class="btn-fight btn btn-danger btn-lg" id="open-modal">
+						Ready
+					</button>
+				</div>
 			</section>
-			<div class="title">
+			<div class="title" id="enemies">
 				<h2>Choose your enemy wisely</h2>
 			</div>
 			<section class="container-card" id="cards-enemigos"></section>
-			<section>
-				<button type="button" class="btn btn-primary btn-lg" id="pelea">
-					Fight
-				</button>
-			</section>
+			
 		</main>
 
 		<aside id="inventario">
@@ -105,3 +111,16 @@
 		<script src="main.js"></script>
 	</body>
 </html>
+
+
+
+<!-- BARRA PARRY 
+		<div id="myContainer">
+					<div id="myAnimation"></div>
+					<div id="item"></div>
+				</div>
+				<div class="d-flex justify-content-center">
+					<p>
+						<button onclick="myMove()">Click Me</button>
+					</p> </div>-->
+				

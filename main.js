@@ -94,33 +94,33 @@ const enemigosPrincipales = [
 const armasMedievales = [
     {
         id: 1,
-        name: "Espada infernal",
+        name: "Infernal sword",
         description:
-            "Poderosa espada creada en mordor, super efectiva contra enemigos bosque",
+            "Infernal sword crafted by the orcs in Mordor, very powerful against water enemies",
         pAtk: 30,
         element: "Fuego",
     },
     {
         id: 2,
-        name: "Arco del bosque",
+        name: "Forest bow",
         description:
-            "Arco y flecha encantados con el poder del bosque, super efectivo contra enemigos tierra",
+            "Very strong attack bow, enchanted by the Ents with the forest power",
         pAtk: 45,
         element: "Planta",
     },
     {
         id: 3,
-        name: "Baculo de agua",
+        name: "Water staff",
         description:
-            "Un arma de hechicero con el poder del agua encantado, super efectivo contra enemigos Fuego",
+            "Wizard weapon, enchanted with the water element.",
         pAtk: 40,
         element: "Agua",
     },
     {
         id: 4,
-        name: "Hacha elemento tierra",
+        name: "Earthquake Axe",
         description:
-            "Hacha legendaria creada por el pueblo enano especialmente encantada con el poder de la tierra, super efectiva contra enemigos agua",
+            "Powerful axe enchanted with the ground spell.",
         pAtk: 40,
         element: "Tierra",
     },
@@ -168,7 +168,6 @@ personajesPrincipales.forEach((personajes) => {
                     <button class="primary-btn btn-choose" id="boton-elegir${
                                             personajes.id
                                         }">Choose</button>
-                    <button class="primary-btn btn-equip">Equip Weapon</button>
                 </div>        
             </div>
         </div>
@@ -180,7 +179,8 @@ enemigosPrincipales.forEach((enemigos) => {
     document.getElementById(
         "cards-enemigos"
     ).innerHTML += `<div class="single-card-containerEne" id="${enemigos.id}"
-    <div class="cards-enemys"><div>
+    <div>
+    <div>
     <img src="https://dummyimage.com/150x150/000/fff" alt="...">
     <div>
         <h5>${enemigos.name}</h5>
@@ -198,10 +198,9 @@ enemigosPrincipales.forEach((enemigos) => {
     }</label></div>
       </ul>
       <div>
-        <button class="primary-btn btn-choose" id="boton-elegir-enemigos${
+        <a href="#page-top"><button class="primary-btn btn-choose" id="boton-elegir-enemigos${
                     enemigos.id
-                }">Choose</button>
-        <button class="primary-btn btn-equip">Equip Weapon</button>
+                }">Choose</button></a>
       </div>
 </div></div>
 </div>`;
@@ -211,7 +210,7 @@ enemigosPrincipales.forEach((enemigos) => {
 armasMedievales.forEach((armas) => {
     document.getElementById(
         "inventario"
-    ).innerHTML += `<div class="armas-container"><div class="card cardsss" style="width: 18rem;">
+    ).innerHTML += `<div class="armas-container"><div class="card cards" style="width: 18rem;">
     <div class="foto-container">
         <img src="..." class="" alt="...">
     </div>
@@ -225,7 +224,7 @@ armasMedievales.forEach((armas) => {
     </ul>
     <div class="">
         <button>Choose</button>
-        <button class="" id="boton-elegir-arma${armas.id}">Equip Weapon</button>
+        <a href="#enemies"><button id="boton-elegir-arma${armas.id}">Equip Weapon</button></a>
     </div>
     </div></div>`;
 });
@@ -267,15 +266,51 @@ function showCharacter() {
 </div>
 </div>`;
 }
-
-
-    
-        /* <div id="showWeapon" class="weapon-container">
-<h5></h5>
+// ========================== muestra cards modal para batalla ==========================
+function loadModal() {
+modal.insertAdjacentHTML = `<div class="char-fight-container"><div class="foto-char">
+<div class="foto-name">
+  <h3 class="name-char">${personajeElegido.name}</h3>
+  <img src="https://dummyimage.com/150x150/000/fff" alt="">
 </div>
-<div id="show-enemy" class="enemy-container">
-<h5></h5> */
- 
+</div>
+<div class="info-char">
+<ul class="stats">
+        <label class="p-atk">Power Atack</label><li>${
+                    personajeElegido.pAtk
+                }</li>
+        <label class="p-def">Defense</label><li>${personajeElegido.pDef}</li>
+        <div class="elegido">
+            <label class="hp">Health Points</label>
+            <div class="contenedorHp">
+            <input 
+            type="range" 
+            id="hpPersonaje${personajeElegido.id}" 
+            class="inputRange" 
+            style="width: ${
+                            personajeElegido.healthPoints * 2
+                        }px; border: none; outline: none;"
+            disabled 
+            min=0
+            max=180>
+            </div>
+            <label class="hpNegro">${personajeElegido.healthPoints}</label>
+        </div>
+      </ul>
+    </div>
+</div>
+</div>`
+}
+
+const getInfo = () => {
+    fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
+        .then((response) => response.json)
+        .then(info => {
+            console.log(info)
+        })
+    }
+getInfo()
+
 
 // ===============================================================================
 //  2. SELECTORS
@@ -290,6 +325,9 @@ let equipWeap = document.querySelectorAll(".equip-weapon");
 let showChar = document.querySelectorAll(".single-card-container");
 let showEne = document.querySelectorAll(".single-card-containerEne");
 let btnElegir = document.querySelectorAll(".cards-char");
+let modal = document.getElementById("modal-fight");
+let openModal = document.getElementById('open-modal')
+
 
 botonElegirWeapon.forEach((singleBtn) => {
     singleBtn.addEventListener("click", () => {
@@ -336,9 +374,14 @@ showEne.forEach((cardContainer) => {
         showEnemy();
     });
 });
-
-document.getElementById("pelea").addEventListener("click", () => {
-    pelea();
+window.addEventListener('click', (e) => {
+    if(e.target == modal) {
+        modal.style.display = "none"
+    }
+})
+openModal.addEventListener("click", () => {
+    modal.style.display = "block";
+    loadModal()
 });
 
 // === CHOOSE MAIN CHARACTER ===
@@ -361,9 +404,12 @@ personajesPrincipales.forEach((personaje) => {
 
 /// === EQUIPPED WEAPON ===
 function showWeapon() {
-    document.getElementById(
-        "personaje-elegido"
-    ).innerHTML += `<div class="weapon-container"><div class="foto-char">
+    const getDom = document.getElementById ('personaje-elegido')
+    const getString = document.getElementById("show-id-weapon")
+        if (getString !== null){ 
+            getDom.removeChild(getString)
+        }
+        getDom.insertAdjacentHTML('beforeend', `<div class="weapon-container" id="show-id-weapon"><div class="foto-char">
     <div class="foto-name">
       <h3 class="name-char">${armaElegida.name}</h3>
       <img src="https://dummyimage.com/150x150/000/fff" alt="">
@@ -376,8 +422,8 @@ function showWeapon() {
           </ul>
         </div>
         </div>    
-        `;
-}
+        `
+)}
 
 // === SHOw CHOSEN ENEMY READY TO BATTLE ===
 function showEnemy() {
